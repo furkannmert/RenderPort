@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(express.json());
@@ -10,6 +11,7 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
+// API endpoint
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
 
@@ -73,6 +75,13 @@ Eğer kullanıcı bu sınırların dışına çıkan bir soru sorarsa kibarca ş
     console.error('Gemini API Hatası:', error.response?.data || error.message);
     res.status(500).json({ error: 'Sunucu hatası oluştu.' });
   }
+});
+
+// React statik dosyalarını sun
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
 app.listen(PORT, () => {

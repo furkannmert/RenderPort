@@ -1,0 +1,12 @@
+{
+  "name": "kombai-portfolio-root",
+  "version": "1.0.0",
+  "description": "Root package for Render deployment",
+  "scripts": {
+    "build": "npm install --prefix kombai-project/backend && npm install --prefix kombai-project/frontend && npm run build --prefix kombai-project/frontend",
+    "start": "npm start --prefix kombai-project/backend"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
