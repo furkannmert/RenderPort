@@ -17,7 +17,7 @@ const Chatbot: React.FC = () => {
     setMessage('');
 
     try {
-      const res = await axios.post('http://localhost:5000/api/chat', { message: userMessage });
+      const res = await axios.post('/api/chat', { message: userMessage });
       const botReply = res.data.reply || 'Cevap alınamadı.';
       setReplyList(prev => [...prev, { type: 'bot', text: botReply }]);
     } catch (error: any) {
